@@ -174,7 +174,7 @@ struct my_fixture
   ~my_fixture() { delete a; }
 };
 
-JUST_TEST_CASE(my_second_test_case, my_fixture)
+JUST_FIXTURE_TEST_CASE(my_second_test_case, my_fixture)
 {
   JUST_ASSERT_EQUAL(*a, 42);
 }
