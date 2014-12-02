@@ -159,6 +159,28 @@ JUST_TEST_CASE(my_first_test_case)
 
 ```
 
+You can also define test cases that use a fixture with the macro
+JUST\_FIXTURE\_TEST\_CASE. This macro takes two arguments: the name of the test
+case, and the fixture to use. The test will run as a member function of a class
+that inherits from the fixture class. This means, you can use the fixture's
+constructor and desctructor for initialization and clean up, also the members
+of the fixture are also accessible directly. For example:
+
+```cpp
+struct my_fixture
+{
+  int *a;
+  my_fixture() : a(new int(42)) {}
+  ~my_fixture() { delete a; }
+};
+
+JUST_TEST_CASE(my_second_test_case, my_fixture)
+{
+  JUST_ASSERT_EQUAL(*a, 42);
+}
+
+```
+
 In the body you can use the following test assertions:
 
 * `JUST_ASSERT(e)` Fails when `e` is false.

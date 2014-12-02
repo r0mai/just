@@ -15,6 +15,14 @@ int g()
   return 13;
 }
 
+struct fixture
+{
+  int h()
+  {
+    return 11;
+  }
+};
+
 JUST_TEST_CASE(hello)
 {
   JUST_ASSERT_THROWS_SOMETHING(f());
@@ -28,6 +36,11 @@ JUST_TEST_CASE(world)
 JUST_TEST_CASE(failing_test)
 {
   JUST_ASSERT_LESS(20, g());
+}
+
+JUST_FIXTURE_TEST_CASE(fixture_test, fixture)
+{
+  JUST_ASSERT_EQUAL(11, h());
 }
 
 JUST_TEST_DEFINE_MAIN
